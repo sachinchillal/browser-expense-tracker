@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollbar {
+  padding-right: 12px;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f3f4f6; /* Tailwind gray-100 */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #3b82f6; /* Tailwind blue-500 */
+    border-radius: 10px;
+    border: 2px solid #f3f4f6; /* Tailwind gray-100 */
+  }
+}
+
+/* Dark mode scrollbar */
+.dark .scrollbar {
+  &::-webkit-scrollbar-track {
+    background: #1f2937; /* Tailwind gray-800 */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #2563eb; /* Tailwind blue-600 */
+    border: 2px solid #1f2937; /* Tailwind gray-800 */
+  }
+}
+/* Add to your global CSS file */
+.loader {
+  border-top-color: #3498db;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    border-top-color: green;
+    transform: rotate(360deg);
+   }
+}

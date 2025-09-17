@@ -2,9 +2,12 @@
 
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
-import { GlobalDataProvider } from "@/providers/GlobalDataProvider";
-import Footer from "@/components/Footer";
+import { Provider } from "react-redux";
+import { store } from "@/store/appStore";
+import { HeaderComponent } from "@/components/Header";
+import { FooterComponent } from "@/components/Footer";
+import { isLoading } from "@/services/appService";
+import { LoaderComponent } from "@/components/Loader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,8 +21,8 @@ const geistMono = localFont({
 });
 
 const metadata1 = {
-  title: "Browser Notepad",
-  description: "A simple notepad application built with Next.js",
+  title: "Browser Expense Tracker",
+  description: "A simple expense tracker browser application built with Next.js",
 };
 
 export default function RootLayout({
@@ -38,11 +41,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-gray-100 bg-gray-50 text-gray-900`}
       >
-        <GlobalDataProvider>
-          <Header />
+        <Provider store={store}>
+          <HeaderComponent />
+          {isLoading && <LoaderComponent />}
           {children}
-          <Footer />
-        </GlobalDataProvider>
+          <FooterComponent />
+        </Provider>
       </body>
     </html>
   );
