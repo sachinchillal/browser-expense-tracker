@@ -26,7 +26,7 @@ export function CreateNoteComponent() {
       setNote("");
     }
     setCurrentNoteId(_currentNoteId);
-  }, [_currentNoteId, _notes]);
+  }, [_currentNoteId, _notes, dispatch]);
 
   const handleSave = () => {
     const n = note.trim();

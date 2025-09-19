@@ -8,6 +8,7 @@ import { HeaderComponent } from "@/components/Header";
 import { FooterComponent } from "@/components/Footer";
 import { isLoading } from "@/services/appService";
 import { LoaderComponent } from "@/components/Loader";
+import { Suspense } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,12 +42,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-gray-100 bg-gray-50 text-gray-900`}
       >
-        <Provider store={store}>
-          <HeaderComponent />
-          {isLoading && <LoaderComponent />}
-          {children}
-          <FooterComponent />
-        </Provider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Provider store={store}>
+            <HeaderComponent />
+            {isLoading && <LoaderComponent />}
+            {children}
+            <FooterComponent />
+          </Provider>
+        </Suspense>
       </body>
     </html>
   );

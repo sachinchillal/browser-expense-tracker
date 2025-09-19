@@ -10,19 +10,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// const Expenses: Expense[] = [];
-// const id = Date.now();
-// for (let index = 0; index < 5; index++) {
-//   Expenses.push({
-//     id: id + index + 2,
-//     title: `Test Expense ${index + 2}`,
-//     description: `This is a test expense ${index + 2}`,
-//     amount: 100 * index,
-//     date: id,
-//     amountType: ExpenseAmountType.ADD
-//   });
-// }
-
 export default function Page() {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
@@ -32,7 +19,6 @@ export default function Page() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [pageId, setPageId] = useState<number>(0);
 
-  // const [expenses, setExpenses] = useState<Expense[]>(Expenses);
   const [totalCredit, setTotalCredit] = useState(0);
   const [totalDebit, setTotalDebit] = useState(0);
   const [totalNA, setTotalNA] = useState(0);
@@ -46,7 +32,6 @@ export default function Page() {
     setLoading(true);
     document.title = "Browser Notepad";
     const id = searchParams.get('id');
-    console.log(id);
     if (id) {
       const pageId = parseInt(id);
       setPageId(pageId);
@@ -59,7 +44,7 @@ export default function Page() {
       }
       setLoading(false);
     }
-  }, []);
+  }, [_pages, searchParams]);
   useEffect(() => {
     let sum = 0, credit = 0, debit = 0, na = 0;
     expenses.forEach(o => {
@@ -79,10 +64,6 @@ export default function Page() {
     setGrandTotal(sum);
   }, [expenses]);
 
-  // useEffect(() => {
-  //   const id = searchParams.get('id');
-  //   console.log(id);
-  // }, [searchParams]);
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>, o: Expense) => {
     const value = e.target.value;
     setExpenses(prevExpenses => prevExpenses.map(exp => ({
@@ -93,7 +74,6 @@ export default function Page() {
 
   const handleAmount = (ele: React.ChangeEvent<HTMLInputElement>, e: Expense) => {
     const value = parseFloat(ele.target.value);
-    console.log({ value });
     if (isNaN(value)) {
       return;
     }
@@ -107,7 +87,6 @@ export default function Page() {
 
   const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>, o: Expense) => {
     const value = e.target.value;
-    console.log({ value });
     setExpenses(prevExpenses => prevExpenses.map(exp => ({
       ...exp,
       description: exp.id === o.id ? value : exp.description
@@ -245,7 +224,7 @@ export default function Page() {
 
         {expenses.length === 0 && (
           <div className="text-gray-400 text-sm">
-            No expenses added yet. Click "Add New Expense" to get started.
+            No expenses added yet. Click &quot;Add New Expense&quot; to get started.
           </div>
         )}
       </div>

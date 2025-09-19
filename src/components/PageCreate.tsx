@@ -34,7 +34,7 @@ export function PageCreateComponent() {
       setCurrentPageId(null);
     }
     setCurrentPageId(_currentPageId);
-  }, [_currentPageId, _pages]);
+  }, [_currentPageId, _pages, dispatch]);
 
   const handleSave = () => {
     const t = title.trim();

@@ -22,7 +22,6 @@ export function PagesComponent() {
 
   useEffect(() => {
     const p: Page[] = Object.values(_pages);
-    console.log(p)
     sortPages([...p], _sortBy, _sortOrder);
   }, [_pages, _sortBy, _sortOrder]);
 
