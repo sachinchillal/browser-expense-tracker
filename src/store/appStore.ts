@@ -15,8 +15,6 @@ export const saveState = (state: RootState) => {
   }
 };
 
-// const preloadedState: any = typeof window !== 'undefined' ? loadState() : undefined;
-
 const loadState = () => {
   if (typeof window !== 'undefined') {
     try {

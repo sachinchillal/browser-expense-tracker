@@ -22,6 +22,7 @@ export default function Page() {
   const [totalCredit, setTotalCredit] = useState(0);
   const [totalDebit, setTotalDebit] = useState(0);
   const [totalNA, setTotalNA] = useState(0);
+  const [total, setTotal] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
 
   // Add state for checkboxes
@@ -61,7 +62,8 @@ export default function Page() {
     setTotalCredit(credit);
     setTotalDebit(debit);
     setTotalNA(na);
-    setGrandTotal(sum);
+    setTotal(sum);
+    setGrandTotal(credit - debit);
   }, [expenses]);
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>, o: Expense) => {
@@ -261,6 +263,10 @@ export default function Page() {
               <tr>
                 <td className="py-2 px-4">Total NA</td>
                 <td className="py-2 px-4 bg-green-100 dark:bg-green-900 font-bold text-right">{totalNA}</td>
+              </tr>
+              <tr className="bg-gray-100 dark:bg-gray-800">
+                <td className="py-2 px-4">Total</td>
+                <td className="py-2 px-4 bg-green-200 dark:bg-green-700 font-bold text-right">{total}</td>
               </tr>
               <tr className="bg-gray-100 dark:bg-gray-800">
                 <td className="py-2 px-4">Grand Total</td>
